@@ -1,0 +1,45 @@
+﻿@page "/ProductPages/Add"
+@using BlazorApp.Models
+@using BlazorApp.Gateway
+
+<h3>Add</h3>
+
+<h4>@message</h4>
+
+<EditForm Model="@product" OnSubmit="AddProduct">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Name</label>
+                <InputText class="form-control" @bind-Value="product.Name">Name</InputText>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Type</label>
+                <InputText class="form-control" @bind-Value="product.Type">Type</InputText>
+            </div>
+
+        </div>
+        <button class="btn btn-info" type="submit">Saved</button>
+    </div>
+</EditForm>
+
+@code {
+    string message = null;
+    Product product = new Product();
+
+    ProductGateway gateway = new ProductGateway();
+    void AddProduct()
+    {
+        bool isSaved = gateway.Add(product);
+        if(isSaved)
+        {
+            product = new Product();
+            message = "Saved Successfully";
+        }
+
+
+    }
+
+}
