@@ -6,29 +6,32 @@
 
 <h4>@message</h4>
 
-<EditForm Model="@product" OnSubmit="AddProduct">
+<EditForm Model="@product"  OnValidSubmit="AddProduct">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+  
+
     <div class="row">
         <div class="col-6">
-            <div class="form-group">
-                <label>Name</label>
-                <InputText class="form-control" @bind-Value="product.Name">Name</InputText>
-            </div>
+            <label>Name</label>
+            <InputText class="form-control" @bind-Value="product.Name">Name</InputText>
+            <ValidationMessage For="@(()=>product.Name)"/> 
         </div>
         <div class="col-6">
-            <div class="form-group">
-                <label>Type</label>
-                <InputText class="form-control" @bind-Value="product.Type">Type</InputText>
-            </div>
-
+            <label>Type</label>
+            <InputText class="form-control" @bind-Value="product.Type">Type</InputText>
+            <ValidationMessage For="@(()=>product.Type)" /> 
         </div>
-        <button class="btn btn-info" type="submit">Saved</button>
+
     </div>
+    <button class="btn btn-info mt-2" type="submit">Saved</button>
+
 </EditForm>
 
 @code {
     string message = null;
+ 
     Product product = new Product();
-
+ 
     ProductGateway gateway = new ProductGateway();
     void AddProduct()
     {
