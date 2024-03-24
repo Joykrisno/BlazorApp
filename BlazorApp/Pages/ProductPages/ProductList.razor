@@ -1,0 +1,42 @@
+﻿@page "/ProductPages/ProductList"
+
+@using BlazorApp.Models
+@using BlazorApp.Gateway
+
+
+ <p>Product List Data</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Products)
+        {
+        <tr>
+
+            <td>@product.Name</td>
+            <td>@product.Type</td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+
+    List<Product> Products = null;
+
+    ProductGateway gateway = new ProductGateway();
+
+
+    protected override void  OnInitialized()
+    {
+        Products = gateway.GetAll();
+    }
+
+}

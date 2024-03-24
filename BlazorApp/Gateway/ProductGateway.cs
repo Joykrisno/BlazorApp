@@ -20,6 +20,11 @@ namespace BlazorApp.Gateway
             }
             return false;
         }
+
+        public List<Product> GetAll()
+        {
+            return _db.products.ToList();
+        }
        
     }
 }
