@@ -1,0 +1,56 @@
+﻿@page "/ProductPages/Edit/{Id:int}"
+@using BlazorApp.Models
+@using BlazorApp.Gateway
+
+<h3>Edit </h3>
+
+<h4>@message</h4>
+
+<EditForm Model="@product" OnValidSubmit="EditProduct">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="row">
+        <div class="col-6">
+            <label>Name</label>
+            <InputText class="form-control" @bind-Value="product.Name">Name</InputText>
+            <ValidationMessage For="@(()=>product.Name)" />
+        </div>
+        <div class="col-6">
+            <label>Type</label>
+            <InputText class="form-control" @bind-Value="product.Type">Type</InputText>
+            <ValidationMessage For="@(()=>product.Type)" />
+        </div>
+
+    </div>
+    <button class="btn btn-info mt-2" type="submit">Update</button>
+
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    string message = null;
+
+    Product product = new Product();
+
+
+    ProductGateway gateway = new ProductGateway();
+
+    protected override void OnInitialized()
+    {
+        product = gateway.GetById(Id);
+    }
+
+    void EditProduct()
+    {
+        bool isSaved = gateway.Update(product);
+        if (isSaved)
+        {
+            product = new Product();
+            message = "Update Successfully";
+        }
+
+
+    }
+
+}

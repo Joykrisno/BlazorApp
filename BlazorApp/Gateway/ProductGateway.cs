@@ -25,6 +25,20 @@ namespace BlazorApp.Gateway
         {
             return _db.products.ToList();
         }
+        public Product GetById(int id)
+        {
+            return _db.products.FirstOrDefault(x => x.Id == id);
+        }
+
+        public bool Update(Product product)
+        {
+            int rowAffected = _db.SaveChanges();
+            if(rowAffected>0)
+            {
+                return true;
+            }
+            return false;
+        }
        
     }
 }

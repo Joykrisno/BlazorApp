@@ -10,6 +10,7 @@
         <tr>
             <th>Name</th>
             <th>Type</th>
+            <th>Action</th>
 
         </tr>
     </thead>
@@ -20,7 +21,7 @@
 
             <td>@product.Name</td>
             <td>@product.Type</td>
-
+            <a href="/ProductPages/Edit/@product.Id">Edit</a>
         </tr>
         }
     </tbody>
@@ -28,6 +29,8 @@
 
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
     List<Product> Products = null;
 
