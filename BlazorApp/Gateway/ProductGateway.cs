@@ -14,7 +14,7 @@ namespace BlazorApp.Gateway
         {
             _db.products.Add(product);
             int rowAffected = _db.SaveChanges();
-            if(rowAffected>0)
+            if (rowAffected > 0)
             {
                 return true;
             }
@@ -28,6 +28,17 @@ namespace BlazorApp.Gateway
         public Product GetById(int id)
         {
             return _db.products.FirstOrDefault(x => x.Id == id);
+        }
+
+
+        public bool Delete(int id)
+        
+        { 
+            var product = _db.products.FirstOrDefault(x => x.Id == id);
+            _db.products.Remove(product);
+            int rowAffected = _db.SaveChanges();
+
+            return rowAffected > 0;
         }
 
         public bool Update(Product product)
