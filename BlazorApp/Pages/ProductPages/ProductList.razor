@@ -15,18 +15,19 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var product in Products)
+        @foreach (var product in Products)
         {
-        <tr>
-
-            <td>@product.Name</td>
-            <td>@product.Type</td>
-            <a href="/ProductPages/Edit/@product.Id">Edit</a>
-
-                <a class="btn-danger" @onclick="(()=>Delete(product.Id))" >Delete</a>
-        </tr>
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Type</td>
+                <td>
+                    <a href="/ProductPages/Edit/@product.Id">Edit</a>
+                    <button class="btn btn-danger" @onclick="(()=>Delete(product.Id))">Delete</button>
+                </td>
+            </tr>
         }
     </tbody>
+
 </table>
 
 
